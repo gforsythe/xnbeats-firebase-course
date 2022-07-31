@@ -31,9 +31,17 @@ function Login() {
     let password = userFormData.password;
     let email = userFormData.email;
 
+    setLoading(true);
 
+    if (register) {
+      console.log("register this info!",userFormData);
+    } else {
+      console.log("login this info!",userFormData);
 
-    console.log("form be submitting!",userFormData);
+    }
+
+    
+
   }
 
 

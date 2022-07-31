@@ -24,10 +24,33 @@ function Login() {
   
   }
 
+  function handleSubmit(e){
+    e.preventDefault();
+    let name = userFormData.name;
+    let lastName = userFormData.lastname;
+    let password = userFormData.password;
+    let email = userFormData.email;
+
+
+
+    console.log("form be submitting!",userFormData);
+  }
+
+
+  function handleFormInputs(e){
+    let name = e.target.name;
+    let value = e.target.value;
+    setUserFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+  }
+
   return (
     <>
     <div className='container login-wrapper'>
-    <form className="form-signin">
+    <form className="form-signin" onSubmit={handleSubmit}>
     <h1 className="h3 mb-3 font-weight-normal">
       {register ? 'Register': "Login"}
     </h1>
@@ -39,6 +62,8 @@ function Login() {
                 name="name"
                 className="form-control mb-3" 
                 placeholder="Your name"
+                onChange={handleFormInputs}
+                value={userFormData.name}
             />
 
             <input 
@@ -47,6 +72,8 @@ function Login() {
                 name="lastname"
                 className="form-control mb-3" 
                 placeholder="Your lastname"
+                onChange={handleFormInputs}
+                value={userFormData.lastname}
             />
         </>
       : null  
@@ -63,6 +90,8 @@ function Login() {
         name="email"
         className="form-control mb-3" 
         placeholder="Email address"
+        onChange={handleFormInputs}
+        value={userFormData.email}
     />
 
     <input 
@@ -71,6 +100,8 @@ function Login() {
         name="password"
         className="form-control" 
         placeholder="Password" 
+        onChange={handleFormInputs}
+        value={userFormData.password}
     />
 
     <br/>

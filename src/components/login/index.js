@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
+import {registerUser} from '../../store/actions';
+import {connect} from 'react-redux';
 
-function Login() {
+function Login(props) {
   const [userFormData, setUserFormData] = useState({
     name:"",
     lastname:"",
@@ -34,6 +36,7 @@ function Login() {
     setLoading(true);
 
     if (register) {
+      props.dispatch(registerUser(userFormData))
       console.log("register this info!",userFormData);
     } else {
       console.log("login this info!",userFormData);
@@ -133,5 +136,7 @@ function Login() {
 </>
   )
 }
-
-export default Login
+const mapStateToProps = state => ({
+  auth:state.auth
+})
+export default connect(mapStateToProps)(Login)

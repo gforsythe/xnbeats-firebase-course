@@ -36,14 +36,18 @@ function Login(props) {
     setLoading(true);
 
     if (register) {
-      props.dispatch(registerUser(userFormData))
+      props.dispatch(registerUser(userFormData)).then(
+        ({payload}) => handleRedirection(payload))
+
       console.log("register this info!",userFormData);
     } else {
       console.log("login this info!",userFormData);
 
     }
 
-    
+    function handleRedirection(){
+
+    }
 
   }
 

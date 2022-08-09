@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 export default function(state=INITIAL_STATE,action){
     switch(action.type){
         case AUTH_USER:
-            return {...action.payload}
+            return {...action.payload, checkingAuth:true}
         default:
             return state;
     }

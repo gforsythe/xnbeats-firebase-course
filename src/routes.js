@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import Login from './components/login';
 import Home from './components/home';
 import Contact from './components/contact';
+import Toasts from './utils/toasts';
+
 
 function Rout() {
   return (
@@ -14,10 +16,12 @@ function Rout() {
       <Route path='/' element={<Home/>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/login' element={<Login/>}/>
+      
        
       
       </Routes>
       <Footer/>
+      <Toasts/>
     </BrowserRouter>
     
     

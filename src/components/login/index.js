@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
-import {registerUser} from '../../store/actions';
+import {registerUser, loginUser} from '../../store/actions';
 import {connect} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 function Login(props) {
   const [userFormData, setUserFormData] = useState({
@@ -10,7 +12,7 @@ function Login(props) {
     email: "",
 
   });
-
+  const navigate = useNavigate()
   const [register, setRegister] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -28,10 +30,7 @@ function Login(props) {
 
   function handleSubmit(e){
     e.preventDefault();
-    let name = userFormData.name;
-    let lastName = userFormData.lastname;
-    let password = userFormData.password;
-    let email = userFormData.email;
+    
 
     setLoading(true);
 
@@ -41,13 +40,25 @@ function Login(props) {
 
       console.log("register this info!",userFormData);
     } else {
+      props.dispatch(loginUser(userFormData)).then(
+        ({payload}) => handleRedirection(payload))
       console.log("login this info!",userFormData);
 
     }
 
-    function handleRedirection(){
+    function handleRedirection(result){
+     if (result.error) {
+      setLoading(false);
+      toast.error(result.error,{
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+     } else {
 
-    }
+       return navigate( '/dashboard'); 
+     }
+
+      
+       }
 
   }
 
